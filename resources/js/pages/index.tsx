@@ -262,7 +262,7 @@ export default function Welcome() {
                                     <span>GitHub</span>
                                 </a>
                                 <a
-                                    href={personal.portfolio}
+                                    href={personal.linkedin}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center gap-2 px-6 py-3 border border-gray-700 text-gray-300 rounded hover:border-[#61AFEF] hover:text-[#61AFEF] transition-colors"
