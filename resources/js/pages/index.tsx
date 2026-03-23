@@ -65,13 +65,13 @@ export default function Welcome() {
             <div className="min-h-screen bg-[#0a0e27] text-gray-300">
                 {/* Header */}
                 <header className="border-b border-gray-800">
-                    <div className="max-w-6xl mx-auto px-6 py-8">
-                        <div className="flex justify-between items-center mb-8">
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6 sm:mb-8">
                             <div>
-                                <h1 className="text-3xl font-bold text-white mb-1">{personal.name}</h1>
-                                <p className="text-[#61AFEF] text-lg">{personal.title}</p>
+                                <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1">{personal.name}</h1>
+                                <p className="text-[#61AFEF] text-base sm:text-lg">{personal.title}</p>
                             </div>
-                            <div className="flex flex-wrap gap-2 max-w-md justify-end">
+                            <div className="flex flex-wrap gap-2 sm:max-w-md">
                                 {skills.backend.slice(0, 5).map((skill, index) => (
                                     <span
                                         key={index}
@@ -84,8 +84,8 @@ export default function Welcome() {
                         </div>
 
                         {/* Navigation */}
-                        <nav className="flex items-center gap-6 text-sm">
-                            <span className="text-[#61AFEF] font-mono">~/portfolio$</span>
+                        <nav className="flex flex-wrap items-center gap-3 sm:gap-6 text-sm">
+                            <span className="text-[#61AFEF] font-mono hidden sm:inline">~/portfolio$</span>
                             <a href="#home" className="text-[#61AFEF] hover:text-white transition-colors">home</a>
                             <a href="#about" className="hover:text-white transition-colors">about</a>
                             <a href="#expertise" className="hover:text-white transition-colors">expertise</a>
@@ -96,13 +96,13 @@ export default function Welcome() {
                 </header>
 
                 {/* Main Content */}
-                <main className="max-w-6xl mx-auto px-6 py-16">
+                <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
 
                     {/* Hero Section */}
-                    <section id="home" className="mb-24">
+                    <section id="home" className="mb-16 sm:mb-24">
                         <div className="mb-8">
-                            <h2 className="text-4xl font-bold text-white mb-4">Welcome</h2>
-                            <p className="text-xl text-gray-400 max-w-3xl leading-relaxed">
+                            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Welcome</h2>
+                            <p className="text-lg sm:text-xl text-gray-400 max-w-3xl leading-relaxed">
                                 {personal.tagline}
                             </p>
                         </div>
@@ -130,9 +130,9 @@ export default function Welcome() {
                     </section>
 
                     {/* About Section */}
-                    <section id="about" className="mb-24">
-                        <h2 className="text-3xl font-bold text-white mb-6">About Me</h2>
-                        <div className="bg-[#1e2139] p-8 rounded-lg border border-gray-800">
+                    <section id="about" className="mb-16 sm:mb-24">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">About Me</h2>
+                        <div className="bg-[#1e2139] p-5 sm:p-8 rounded-lg border border-gray-800">
                             <p className="text-gray-300 leading-relaxed mb-6">
                                 {personal.bio}
                             </p>
@@ -172,8 +172,8 @@ export default function Welcome() {
                     </section>
 
                     {/* Expertise Section */}
-                    <section id="expertise" className="mb-24">
-                        <h2 className="text-3xl font-bold text-white mb-6">Expertise</h2>
+                    <section id="expertise" className="mb-16 sm:mb-24">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Expertise</h2>
                         <div className="grid md:grid-cols-3 gap-6">
                             {expertise.map((area, index) => (
                                 <div
@@ -200,22 +200,22 @@ export default function Welcome() {
                     </section>
 
                     {/* Experience Section */}
-                    <section id="experience" className="mb-24">
-                        <h2 className="text-3xl font-bold text-white mb-6">Experience</h2>
+                    <section id="experience" className="mb-16 sm:mb-24">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Experience</h2>
                         <div className="space-y-6">
                             {experience.map((job, index) => (
                                 <div
                                     key={index}
-                                    className="bg-[#1e2139] p-6 rounded-lg border border-gray-800 hover:border-[#61AFEF] transition-all"
+                                    className="bg-[#1e2139] p-5 sm:p-6 rounded-lg border border-gray-800 hover:border-[#61AFEF] transition-all"
                                 >
-                                    <div className="flex justify-between items-start mb-3">
+                                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-3">
                                         <div>
-                                            <h3 className="text-xl font-semibold text-white">
+                                            <h3 className="text-lg sm:text-xl font-semibold text-white">
                                                 {job.title}
                                             </h3>
                                             <p className="text-[#61AFEF] text-sm mt-1">{job.company}</p>
                                         </div>
-                                        <span className="text-gray-500 text-sm whitespace-nowrap ml-4">
+                                        <span className="text-gray-500 text-sm sm:whitespace-nowrap sm:ml-4">
                                             {job.period}
                                         </span>
                                     </div>
@@ -236,9 +236,9 @@ export default function Welcome() {
                     </section>
 
                     {/* Contact Section */}
-                    <section id="contact" className="mb-24">
-                        <h2 className="text-3xl font-bold text-white mb-6">Get In Touch</h2>
-                        <div className="bg-[#1e2139] p-8 rounded-lg border border-gray-800">
+                    <section id="contact" className="mb-16 sm:mb-24">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6">Get In Touch</h2>
+                        <div className="bg-[#1e2139] p-5 sm:p-8 rounded-lg border border-gray-800">
                             <p className="text-gray-300 mb-6 leading-relaxed">
                                 I'm always interested in hearing about new projects and opportunities.
                                 Feel free to reach out if you'd like to work together!
@@ -308,7 +308,7 @@ export default function Welcome() {
 
                 {/* Footer */}
                 <footer className="border-t border-gray-800 py-8">
-                    <div className="max-w-6xl mx-auto px-6 text-center text-gray-500 text-sm">
+                    <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center text-gray-500 text-sm">
                         <p>© {new Date().getFullYear()} {personal.name}. Built with React & Laravel.</p>
                     </div>
                 </footer>
