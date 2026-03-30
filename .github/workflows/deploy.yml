@@ -1,4 +1,4 @@
-name: Deploy to Raspberry Pi
+name: Deploy
 
 on:
   push:
@@ -8,28 +8,31 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Tailscale
-        uses: tailscale/github-action@v2
-        with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:ci
 
-      - name: Deploy to Pi
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /var/www/html/portfolio_v2
-            git pull origin main
-            composer install --no-dev --optimize-autoloader
-            npm install
-            npm run build
-            php artisan migrate --force
-            php artisan cache:clear
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:cache
+    steps:
+      - name: Install cloudflared
+        run: |
+          curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
+          chmod +x cloudflared
+          sudo mv cloudflared /usr/local/bin/
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "Host ssh.gorst.dev
+            ProxyCommand cloudflared access ssh --hostname %h
+            StrictHostKeyChecking no" >> ~/.ssh/config
+
+      - name: Deploy
+        run: |
+          ssh ${{ secrets.SSH_USER }}@ssh.gorst.dev \
+            "cd /var/www/html/portfolio_v2 \
+            && git pull origin main \
+            && composer install --no-dev --optimize-autoloader \
+            && npm install \
+            && npm run build \
+            && php artisan migrate --force \
+            && php artisan optimize:clear \
+            && php artisan optimize"
